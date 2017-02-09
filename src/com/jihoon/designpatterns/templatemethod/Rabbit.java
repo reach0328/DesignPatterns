@@ -7,5 +7,5 @@ public class Rabbit extends TemplateMethod {
 		// TODO Auto-generated method stub
 		System.out.println("ฑ๘รั ฑ๘รั");
 	}
-
+	
 }

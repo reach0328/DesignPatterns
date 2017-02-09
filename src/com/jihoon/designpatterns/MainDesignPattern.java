@@ -1,15 +1,23 @@
 package com.jihoon.designpatterns;
 
+import com.jihoon.designpatterns.factorymethod.Product;
+import com.jihoon.designpatterns.factorymethod.TVFactory;
 import com.jihoon.designpatterns.proxy.Bbs;
 import com.jihoon.designpatterns.proxy.Proxy;
 import com.jihoon.designpatterns.singleton.Multiton;
 import com.jihoon.designpatterns.singleton.Singleton;
+import com.jihoon.designpatterns.strategy.Soldier;
+import com.jihoon.designpatterns.strategy.Strategy;
+import com.jihoon.designpatterns.strategy.StrategyGun;
+import com.jihoon.designpatterns.strategy.StrategySheild;
+import com.jihoon.designpatterns.strategy.StrategySword;
 import com.jihoon.designpatterns.templatemethod.Frog;
 import com.jihoon.designpatterns.templatemethod.Rabbit;
 import com.jihoon.designpatterns.templatemethod.TemplateMethod;
 
 public class MainDesignPattern {
 
+	
 	public static void main(String[] args) {
 
 		//1. singleton pattern
@@ -39,13 +47,69 @@ public class MainDesignPattern {
 		System.out.printf("Bbs.no =%d, Bbs.Title = %s Bbs.content = %s \n", bbs.no,bbs.title,bbs.content);		
 		
 		
-		
-		
 		//4. template Method patterns
 		TemplateMethod frog = new Frog();
 		frog.play();
 		TemplateMethod rabbit = new Rabbit();
 		rabbit.play();
+		
+		
+		//5. FactoryMethod pattern
+		TVFactory factory = new TVFactory();
+		Product product = factory.make();
+		factory.pack(product);
+		
+		
+		// 6. 전략 패턴을 사용합니다. Main이 클라이언트
+		Strategy strategy = null;
+		Soldier context = new Soldier();
+		context.status = Soldier.NEAR;
+		
+		// 전락패턴은 전략인터페이스를 구현한 구현체를 주입한다.
+		if(context.status == Soldier.ATTACKED) {
+			strategy = new StrategySheild();
+		} else if(context.status == Soldier.NEAR){
+			strategy = new StrategySword();
+		} else {
+			strategy = new StrategyGun();
+		}
+		// 전략을 컨텍스트에 넘겨 사용한다
+		context.useStrategy(strategy);
+		
+		
+		// 7. 전략 callback 패턴을 사용합니다
+		// 전략 패턴과 동일한데 전략 자체를 클라이언트에서 익명개체로 생성한다.
+		Strategy strategy2 = null;
+		Soldier context2 = new Soldier();
+		context2.status = Soldier.ATTACKED;
+		
+		// 전략 callBack은 구현체를 사용하지 않고 익명 객체를 코드상에서 구현해준다.
+		if(context2.status == Soldier.ATTACKED) {
+			context2.useStrategy(new Strategy(){
+				@Override
+				public void runStrategy() {
+					useSheid();
+					System.out.println("막는다");
+				}
+				private void useSheid() {
+					System.out.println("방패를 양손에 잡고");
+				}
+			});	
+		} else if(context2.status == Soldier.NEAR){
+			context2.useStrategy(new Strategy(){
+				@Override
+				public void runStrategy() {
+					System.out.println("찌른다");
+				}
+			});		
+		} else {
+			context2.useStrategy(new Strategy(){
+				@Override
+				public void runStrategy() {
+					System.out.println("쏜다");
+				}
+			});		
+		}
 		
 	}
 }

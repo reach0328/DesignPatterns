@@ -1,5 +1,5 @@
 package com.jihoon.designpatterns.factorymethod;
 
-public class Product {
-
+public abstract class Product {
+	public abstract void printLabel();
 }

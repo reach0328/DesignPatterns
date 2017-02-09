@@ -4,14 +4,13 @@ public class TVFactory extends FactoryMethod {
 
 	@Override
 	public Product make() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TV();
 	}
 
 	@Override
-	public Packed pack() {
-		// TODO Auto-generated method stub
-		return null;
+	public Packed pack(Product product) {
+		TVpacked packed = new TVpacked();
+		packed.setProduct(product);
+		return packed;
 	}
-
 }
