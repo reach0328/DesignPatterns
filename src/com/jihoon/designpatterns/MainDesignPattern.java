@@ -2,6 +2,8 @@ package com.jihoon.designpatterns;
 
 import com.jihoon.designpatterns.factorymethod.Product;
 import com.jihoon.designpatterns.factorymethod.TVFactory;
+import com.jihoon.designpatterns.observer.KakaoTalkServer;
+import com.jihoon.designpatterns.observer.User;
 import com.jihoon.designpatterns.proxy.Bbs;
 import com.jihoon.designpatterns.proxy.Proxy;
 import com.jihoon.designpatterns.singleton.Multiton;
@@ -107,9 +109,19 @@ public class MainDesignPattern {
 				@Override
 				public void runStrategy() {
 					System.out.println("쏜다");
-				}
+				}	
 			});		
 		}
 		
+		//8. 옵저버 사용하기
+		//8-1. 옵저버를 사용하기 위해서는 서버가 먼저 생성 되어야 한다.
+		KakaoTalkServer server = new KakaoTalkServer();
+		
+		User park = new User(server,"park");
+		User kim = new User(server,"kim");
+		
+		User lee = new User(server,"lee");
+		
+		park.addMessage("안녕하세요");
 	}
 }
