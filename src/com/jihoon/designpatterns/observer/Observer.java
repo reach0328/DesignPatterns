@@ -7,8 +7,5 @@ package com.jihoon.designpatterns.observer;
  */
 public interface Observer {
 	// 옵저버를 제공하는 서버측에서  변경사항이 있을경우 호출하는 함
-	public void update(String msg);
-	
-	
-	
+	public void update();
 }

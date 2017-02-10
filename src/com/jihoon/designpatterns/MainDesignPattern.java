@@ -117,11 +117,12 @@ public class MainDesignPattern {
 		//8-1. 옵저버를 사용하기 위해서는 서버가 먼저 생성 되어야 한다.
 		KakaoTalkServer server = new KakaoTalkServer();
 		
-		User park = new User(server,"park");
-		User kim = new User(server,"kim");
+		new User(server,"park");
+		new User(server,"kim");
+		new User(server,"lee");
+//		park.addMessage("안녕하세요");
+		// 서버를 통해  공지를 띄운다.
+		server.sendMessage("한시간만 잇으면 점시시간입니다.");
 		
-		User lee = new User(server,"lee");
-		
-		park.addMessage("안녕하세요");
 	}
 }

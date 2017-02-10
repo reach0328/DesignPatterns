@@ -16,15 +16,16 @@ public class User implements Observer {
 	}
 	
 	@Override
-	public void update(String msg) {
+	public void update() {
+		String msg = server.data;
 		messages.add(msg);
 		showMessage();
 	}
-	// 타이핑을 통해 입력되는 메시지
-	public void addMessage(String msg) {
-		server.sendMessage(msg);
-	}
-	
+//	// 타이핑을 통해 입력되는 메시지
+//	public void addMessage(String msg) {
+//		server.sendMessage(msg);
+//	}
+//	
 	public void showMessage() {
 		System.out.println(name+"에게 온 메시지:"+ messages.get(messages.size()-1));
 	}
