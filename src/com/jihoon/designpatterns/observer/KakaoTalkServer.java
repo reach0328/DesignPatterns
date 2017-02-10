@@ -23,6 +23,7 @@ public class KakaoTalkServer {
 	private void notification() {
 		for(Observer observer : observers) {
 			observer.update();
+			
 		}
 	}
 	
